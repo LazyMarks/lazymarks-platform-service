@@ -40,10 +40,10 @@ public final class JWTManager {
 	private JWTVerifier jwtVerifier = JWT.require(algorithm).withIssuer(ISSUER).build();
 
 	public AuthenticationResponse generateToken(UserDetails userDetails) {
-		final LazymarksUserDetails nevtopUserDetails = LazymarksUserDetails.class.cast(userDetails);
+		final LazymarksUserDetails lmUserDetails = LazymarksUserDetails.class.cast(userDetails);
 		final String accessToken = generateToken(userDetails, ACCESS_TOKEN, ACCESS_TOKEN_VALIDITY);
 		final String refreshToken = generateToken(userDetails, REFRESH_TOKEN, REFRESH_TOKEN_VALIDITY);
-		return new AuthenticationResponse(accessToken, refreshToken, nevtopUserDetails.getUser());
+		return new AuthenticationResponse(accessToken, refreshToken, lmUserDetails.getUser());
 	}
 	
 	private String generateToken(UserDetails userDetails, String type, int timePeriod) {

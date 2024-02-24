@@ -2,6 +2,7 @@ package com.lazymarks.platform.api.model;
 
 import java.util.Collection;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -32,11 +33,12 @@ public class LazymarksUserDetails implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return this.user.getUsername();
-	}
-
-	public String getEmail() {
-		return this.user.getEmail();
+		String username = this.user.getUsername();
+		if (Strings.isBlank(username)) {
+			username = this.user.getEmail();
+		}
+		
+		return username; 
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class AuthenticationService {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 		} catch(BadCredentialsException e) {
-			throw new BadCredentialsException("Bad Login Credentials", e);
+			throw new BadCredentialsException("Invalid credentials", e);
 		}
 		
 		final UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(authRequest.getUsername());

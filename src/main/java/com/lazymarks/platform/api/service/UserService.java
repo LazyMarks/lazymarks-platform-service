@@ -21,7 +21,7 @@ public class UserService {
 	public GenericResponse<User> createUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setActive(true);
-		user = userRepository.saveAndFlush(user);
+		user = this.userRepository.saveAndFlush(user);
 		return GenericResponse.success(user);
 	}
 	
