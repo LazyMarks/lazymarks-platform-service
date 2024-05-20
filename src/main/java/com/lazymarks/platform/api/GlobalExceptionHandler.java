@@ -27,4 +27,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return createResponseEntity(GenericResponse.error(ex.getMessage()), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<Object> handleBadRequestException(IllegalArgumentException ex, WebRequest request) {
+		return createResponseEntity(GenericResponse.error(ex.getMessage()), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+
 }

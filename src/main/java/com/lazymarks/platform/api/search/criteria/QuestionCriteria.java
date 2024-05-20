@@ -10,20 +10,15 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class QuestionCriteria extends SearchCriteria {
-    private Integer starRatingLessThan;
-    private Integer startRatingGreaterThan;
+    private Double starRating;
+    private String startRatingOperator;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime createdBefore;
+    private LocalDateTime createdAt;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime createdAfter;
+    private LocalDateTime updatedAt;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime updatedBefore;
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime updatedAfter;
-
-    private String createdBy;
+    private String dateOperator;
+    private Integer createdBy;
 }

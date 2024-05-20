@@ -23,7 +23,8 @@ public class QuestionService {
 	}
 
 	public GenericResponse<List<Question>> getQuestions(QuestionCriteria questionCriteria) {
-		log.info("Question search params: {}", questionCriteria);
-		return null;
+		log.debug("Question search params: {}", questionCriteria);
+		List<Question> questions = questionRepository.getQuestionsByCriteria(questionCriteria);
+		return GenericResponse.success(questions);
 	}
 }

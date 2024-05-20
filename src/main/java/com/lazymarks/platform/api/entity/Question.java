@@ -34,8 +34,8 @@ public class Question {
 	@NotBlank(message = "Question body can't be empty")
 	private String body;
 
-	@Column(name = "star_rating", columnDefinition = "TINYINT", length = 1)
-	private Integer starRating;
+	@Column(name = "star_rating")
+	private Double starRating;
 
 	@Column(name = "created_by")
 	private Long createdBy;
