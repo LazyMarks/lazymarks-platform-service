@@ -49,6 +49,8 @@ public class SecurityConfiguration {
 
 		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/h2/**").permitAll()
 				.requestMatchers("/user-service/v1/users").permitAll()
+				.requestMatchers("/user-service/v1/users/**").permitAll()
+				.requestMatchers("/question-service/v1/questions").permitAll()
 				.requestMatchers("/auth-service/v1/token/access").permitAll()
 				.anyRequest().authenticated());
 

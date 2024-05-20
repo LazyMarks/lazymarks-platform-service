@@ -21,17 +21,16 @@ public class UserService {
 	public GenericResponse<User> createUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setActive(true);
-		user = this.userRepository.saveAndFlush(user);
-		return GenericResponse.success(user);
+		return GenericResponse.success(this.userRepository.saveAndFlush(user));
 	}
 
 	public User getUserByUsernameOrEmail(String username) throws UsernameNotFoundException {
-		String email = username;
-		return this.userRepository.findByUsernameOrEmail(username, email)
+		return this.userRepository.findByUsernameOrEmail(username, username)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 	}
 
-	public User getUserById(Long userId) {
-		return userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+	public GenericResponse<User> getUserById(Long userId) {
+		User user = userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		return GenericResponse.success(user);
 	}
 }
