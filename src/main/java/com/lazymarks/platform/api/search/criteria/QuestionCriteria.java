@@ -1,14 +1,14 @@
 package com.lazymarks.platform.api.search.criteria;
 
-import lombok.*;
-import org.springframework.data.domain.Sort;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class QuestionCriteria extends SearchCriteria {
     private Double starRating;
     private String startRatingOperator;
