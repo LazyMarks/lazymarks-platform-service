@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QuestionCriteria extends SearchCriteria {
+    private String query;
     private Double starRating;
     private String startRatingOperator;
 
