@@ -1,30 +1,32 @@
 package com.lazymarks.platform.api.service;
 
-import com.lazymarks.platform.api.search.criteria.QuestionCriteria;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lazymarks.platform.api.entity.Question;
-import com.lazymarks.platform.api.model.GenericResponse;
 import com.lazymarks.platform.api.repository.QuestionRepository;
+import com.lazymarks.platform.api.search.criteria.QuestionCriteria;
 
-import java.util.List;
-
-@Slf4j
+//@Slf4j
 @Service
 public class QuestionService {
 
 	@Autowired
 	private QuestionRepository questionRepository;
+	
+	public Question createQuestion(Question question) {
+        return questionRepository.save(question);
+    }
 
-	public GenericResponse<Question> createQuestion(Question question) {
-		return GenericResponse.success(this.questionRepository.saveAndFlush(question));
-	}
+    public Question getQuestionById(Long questionId) {
+        return questionRepository.findById(questionId).orElse(null);
+    }
 
-	public GenericResponse<List<Question>> getQuestions(QuestionCriteria questionCriteria) {
-		log.debug("Question search params: {}", questionCriteria);
-		List<Question> questions = questionRepository.getQuestionsByCriteria(questionCriteria);
-		return GenericResponse.success(questions);
-	}
+    public List<Question> getQuestions(QuestionCriteria criteria) {
+        return questionRepository.findAll(); 
+    }
+
+
 }

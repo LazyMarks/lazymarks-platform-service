@@ -33,9 +33,15 @@ public class Answer {
 	@Column(name = "body", columnDefinition = "text", length = 65536, nullable = false)
 	@NotBlank(message = "Question body can't be empty")
 	private String body;
+	
+	@Column(name = "question_id", nullable = false)
+	private Long questionId;
 
-	@Column(name = "star_rating", columnDefinition = "TINYINT", length = 1)
-	private Integer starRating;
+	@Column(name = "like_count")
+	private Integer likeCount;
+	
+	@Column(name = "dislike_count")
+	private Integer dislikeCount;
 
 	@Column(name = "created_by")
 	private Long createdBy;
@@ -43,9 +49,6 @@ public class Answer {
 	@CreationTimestamp
 	@Column(name = "created_at")
 	private Timestamp createdAt;
-
-	@Column(name = "updated_by")
-	private Long updatedBy;
 
 	@UpdateTimestamp
 	@Column(name = "updated_at")

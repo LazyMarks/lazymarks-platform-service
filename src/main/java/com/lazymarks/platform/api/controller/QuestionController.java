@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.lazymarks.platform.api.entity.Question;
 import com.lazymarks.platform.api.model.LazymarksUserDetails;
+import com.lazymarks.platform.api.service.AnswerService;
 import com.lazymarks.platform.api.service.QuestionService;
 
 import jakarta.validation.Valid;
@@ -21,8 +22,12 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
+	@Autowired
+	private AnswerService answerService;
+
 	@PostMapping
-	public ResponseEntity<Object> createQuestion(@RequestBody @Valid Question question, @AuthenticationPrincipal UserDetails userDetails) {
+	public ResponseEntity<Object> createQuestion(@RequestBody @Valid Question question,
+			@AuthenticationPrincipal UserDetails userDetails) {
 		final LazymarksUserDetails lmUserDetails = (LazymarksUserDetails) userDetails;
 		question.setCreatedBy(lmUserDetails.getUser().getId());
 		question.setUpdatedBy(lmUserDetails.getUser().getId());
@@ -32,5 +37,16 @@ public class QuestionController {
 	@GetMapping
 	public ResponseEntity<Object> getQuestions(QuestionCriteria questionCriteria) {
 		return ResponseEntity.ok(this.questionService.getQuestions(questionCriteria));
+	}
+
+	@GetMapping("/{questionId}/answers")
+	public ResponseEntity<Object> getAnswersByQuestionId(@PathVariable Long questionId) {
+
+		Question question = this.questionService.getQuestionById(questionId);
+		if (question == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("question not found");
+		}
+
+		return ResponseEntity.ok(this.answerService.getAnswersByQuestionId(questionId));
 	}
 }
