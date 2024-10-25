@@ -2,10 +2,7 @@ package com.lazymarks.platform.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lazymarks.platform.api.model.AuthenticationRequest;
 import com.lazymarks.platform.api.service.AuthenticationService;
@@ -18,6 +15,11 @@ public class AuthenticationController {
 	
 	@Autowired
 	private AuthenticationService authService;
+
+	@GetMapping("/greet")
+	public ResponseEntity<String> greet() {
+		return ResponseEntity.ok("welcome");
+	}
 
 	@PostMapping("/access")
 	public ResponseEntity<Object> createJwtAuthToken(@Valid @RequestBody AuthenticationRequest authRequest) {

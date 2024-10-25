@@ -16,18 +16,18 @@ import com.lazymarks.platform.api.service.UserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/user-service/v1/users")
+//@RequestMapping(path = "/user-service/v1/users")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 
-	@PostMapping
+//	@PostMapping
 	public ResponseEntity<Object> createUser(@RequestBody @Valid User user) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.createUser(user));
 	}
 
-	@GetMapping("/{userId}")
+//	@GetMapping("/{userId}")
 	public ResponseEntity<Object> getUserById(@PathVariable Long userId) {
 			return ResponseEntity.status(HttpStatus.OK).body(this.userService.getUserById(userId));
 	}

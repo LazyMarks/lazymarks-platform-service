@@ -52,6 +52,7 @@ public class SecurityConfiguration {
 				.requestMatchers("/user-service/v1/users/**").permitAll()
 				.requestMatchers("/question-service/v1/questions").permitAll()
 				.requestMatchers("/auth-service/v1/token/access").permitAll()
+				.requestMatchers("/auth-service/v1/token/greet").permitAll()
 				.anyRequest().authenticated());
 
 		http.authenticationManager(authenticationManager);
